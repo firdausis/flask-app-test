@@ -18,3 +18,5 @@ bcrypt = Bcrypt(app)
 from . import models, resources
 
 api.add_resource(resources.Login, '/api/dm/login')
+api.add_resource(resources.DataFile, '/api/dm/datafiles')
+api.add_resource(resources.DataFileDetail, '/api/dm/datafiles/<int:id>')
