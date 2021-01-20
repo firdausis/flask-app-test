@@ -20,17 +20,30 @@ def login(client):
     return client.post('/api/dm/login', headers={'Content-Type': 'application/json'}, data=payload)
 
 def post_datafile(client, token):
+    headers = None
+    if token:
+        headers={'Authorization': 'Bearer %s' % token}
+    
     file_name = FILE_NAME
     form_data = {
         'file': FileStorage(stream=open(FILE_PATH, 'rb'), filename=file_name)
     }
-    return client.post('/api/dm/datafiles', headers={'Authorization': 'Bearer %s' % token}, content_type='multipart/form-data', data=form_data)
+
+    return client.post('/api/dm/datafiles', headers=headers, content_type='multipart/form-data', data=form_data)
 
 def get_datafiles(client, token):
-    return client.get('/api/dm/datafiles?offset=0&limit=100', headers={'Authorization': 'Bearer %s' % token})
+    headers = None
+    if token:
+        headers={'Authorization': 'Bearer %s' % token}
+
+    return client.get('/api/dm/datafiles?offset=0&limit=100', headers=headers)
 
 def get_datafiledetails(client, token, id):
-    return client.get('/api/dm/datafiles/%d?offset=0&limit=100' % id, headers={'Authorization': 'Bearer %s' % token})
+    headers = None
+    if token:
+        headers={'Authorization': 'Bearer %s' % token}
+
+    return client.get('/api/dm/datafiles/%d?offset=0&limit=100' % id, headers=headers)
 
 class LoginTest(unittest.TestCase):
     def setUp(self):
