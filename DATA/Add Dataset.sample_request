@@ -1,0 +1,10 @@
+POST /api/dm/datafiles HTTP/1.1
+Host: 127.0.0.1:5000
+Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE2MTExMjQzOTEsIm5iZiI6MTYxMTEyNDM5MSwianRpIjoiM2E4YzNjM2UtZjczZi00ZGI2LWE5ZTctNDc5ZDYzY2NhOGM0IiwiZXhwIjoxNjExMTI1MjkxLCJpZGVudGl0eSI6ImpvaG5zbWl0aCIsImZyZXNoIjpmYWxzZSwidHlwZSI6ImFjY2VzcyJ9.Vx668jUi4ESOJ8d0ggn359WX6mzp-zd6Wdwc7F62PLU
+Content-Type: multipart/form-data; boundary=----WebKitFormBoundary7MA4YWxkTrZu0gW
+
+----WebKitFormBoundary7MA4YWxkTrZu0gW
+Content-Disposition: form-data; name="file"; filename="/C:/Users/firda/Python/turing/carta/flask-app-test/DATA/sample-dataset.xlsm"
+
+(data)
+----WebKitFormBoundary7MA4YWxkTrZu0gW
