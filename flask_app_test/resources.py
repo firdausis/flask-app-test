@@ -23,6 +23,11 @@ class Login(Resource):
                 'message': 'username %s doesn\'t exist' % username
             }, 404
 
+        if not current_user.is_active:
+            return {
+                'message': 'username %s is inactive' % username
+            }, 401
+
         if current_user.verify_password(password):
             access_token = create_access_token(identity=username)
             return {
