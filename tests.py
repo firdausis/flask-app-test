@@ -46,15 +46,24 @@ def get_datafiledetails(client, token, id):
     return client.get('/api/dm/datafiles/%d?offset=0&limit=100' % id, headers=headers)
 
 class LoginTest(unittest.TestCase):
+    """
+    Tests for user login.
+    """
     def setUp(self):
         self.client = app.test_client()
 
     def test_login(self):
+        """
+        Ensure user can login and get access token.
+        """
         response = login(self.client)
         self.assertEqual(200, response.status_code)
         self.assertEqual(str, type(response.json['access_token']))
 
 class DataFileTest(unittest.TestCase):
+    """
+    Tests for user dataset management.
+    """
     def setUp(self):
         self.client = app.test_client()
         
@@ -65,6 +74,9 @@ class DataFileTest(unittest.TestCase):
         self.user_id = user.id
 
     def test_datafile_post(self):
+        """
+        Ensure user can create new dataset.
+        """
         post_datafile_response = post_datafile(self.client, self.token)
         self.assertEqual(201, post_datafile_response.status_code)
 
@@ -92,6 +104,9 @@ class DataFileTest(unittest.TestCase):
             self.assertEqual(datafiledetail.data_value, row['Value'])
 
     def test_datafile_get(self):
+        """
+        Ensure user can list dataset.
+        """
         get_datafiles_response = get_datafiles(self.client, self.token)
         self.assertEqual(200, get_datafiles_response.status_code)
         
@@ -110,14 +125,23 @@ class DataFileTest(unittest.TestCase):
                     self.assertEqual(datafile.created_time.strftime('%Y-%m-%d %H:%M:%S'), r['created_time'])
 
     def test_datafile_post_unauthorized(self):
+        """
+        Ensure anonymous user cannot create any dataset.
+        """
         post_datafile_response = post_datafile(self.client, '')
         self.assertEqual(401, post_datafile_response.status_code)
 
     def test_datafile_get_unauthorized(self):
+        """
+        Ensure anonymous user cannot list any dataset.
+        """
         get_datafiles_response = get_datafiles(self.client, '')
         self.assertEqual(401, get_datafiles_response.status_code)
 
 class DataFileDetailTest(unittest.TestCase):
+    """
+    Tests for user dataset details.
+    """
     def setUp(self):
         self.client = app.test_client()
         
@@ -128,6 +152,9 @@ class DataFileDetailTest(unittest.TestCase):
         self.datafile_id = post_datafile_response.json['id']
 
     def test_datafiledetails_get(self):
+        """
+        Ensure user can view dataset details.
+        """
         get_datafiledetails_response = get_datafiledetails(self.client, self.token, self.datafile_id)
         self.assertEqual(200, get_datafiledetails_response.status_code)
 
@@ -148,6 +175,9 @@ class DataFileDetailTest(unittest.TestCase):
             self.assertEqual(datafiledetail.data_value, r['data_value'])
 
     def test_datafiledetails_get_unauthorized(self):
+        """
+        Ensure anonymous user cannot view dataset details.
+        """
         get_datafiledetails_response = get_datafiledetails(self.client, '', self.datafile_id)
         self.assertEqual(401, get_datafiledetails_response.status_code)
 

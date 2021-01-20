@@ -5,6 +5,9 @@ from .app import db
 from .app import bcrypt
 
 class UserModel(db.Model):
+    """
+    Model for users.
+    """
     __tablename__ = 'users'
 
     id = db.Column(db.Integer, primary_key=True)
@@ -23,6 +26,9 @@ class UserModel(db.Model):
         return self.query.filter_by(user_name=user_name).first()
 
 class UserDataModel(db.Model):
+    """
+    Model for dataset metadata.
+    """
     __tablename__ = 'user_data'
 
     id = db.Column(db.Integer, primary_key=True)
@@ -65,6 +71,9 @@ class UserDataModel(db.Model):
         return self.query.filter_by(id=id).first()
 
 class UserDataDetailModel(db.Model):
+    """
+    Model for dataset details.
+    """
     __tablename__ = 'user_data_details'
 
     id = db.Column(db.Integer, primary_key=True)

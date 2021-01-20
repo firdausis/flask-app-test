@@ -7,11 +7,17 @@ from .models import UserModel, UserDataModel, UserDataDetailModel
 from .app import db
 
 class Login(Resource):
+    """
+    Resource for user authentication.
+    """
     parser = reqparse.RequestParser()
     parser.add_argument('username', type=str, help='username cannot be blank', required=True)
     parser.add_argument('password', type=str, help='password cannot be blank', required=True)
 
     def post(self):
+        """
+        Verify username and password to generate access token.
+        """
         data = self.parser.parse_args()
         username = data['username']
         password = data['password']
@@ -39,6 +45,9 @@ class Login(Resource):
             }, 401
 
 class DataFile(Resource):
+    """
+    Resource for dataset management.
+    """
     parser = reqparse.RequestParser()
     parser.add_argument('file', type=FileStorage, location='files')
     parser.add_argument('offset', type=int, location='args')
@@ -46,6 +55,9 @@ class DataFile(Resource):
     
     @jwt_required
     def post(self):
+        """
+        Send data file and create dataset entries.
+        """
         current_username = get_jwt_identity()
         current_user = UserModel.find_by_user_name(current_username)
 
@@ -87,6 +99,9 @@ class DataFile(Resource):
 
     @jwt_required
     def get(self):
+        """
+        List dataset metadata.
+        """
         current_username = get_jwt_identity()
         current_user = UserModel.find_by_user_name(current_username)
 
@@ -111,12 +126,18 @@ class DataFile(Resource):
         }
 
 class DataFileDetail(Resource):
+    """
+    Resource for dataset management.
+    """
     parser = reqparse.RequestParser()
     parser.add_argument('offset', type=int, location='args')
     parser.add_argument('limit', type=int, location='args')
 
     @jwt_required
     def get(self, id):
+        """
+        View dataset details.
+        """
         current_username = get_jwt_identity()
         current_user = UserModel.find_by_user_name(current_username)
 
