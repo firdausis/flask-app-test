@@ -11,3 +11,8 @@ By default the server will run at `http://127.0.0.1:5000/`.
 * User login: `/api/dm/login`
 * Data files: `/api/dm/datafiles`
 * Data file details: `/api/dm/datafiles/<id>`
+
+Some sample requests and responses are provided in the `DATA` folder.
+
+## Running tests
+`python tests.py`
