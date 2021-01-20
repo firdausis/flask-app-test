@@ -4,7 +4,7 @@ from werkzeug.datastructures import FileStorage
 import pandas as pd
 
 from .models import UserModel, UserDataModel, UserDataDetailModel
-from .app import db
+from .main import db
 
 class Login(Resource):
     """

@@ -1,8 +1,8 @@
 import datetime
 from sqlalchemy.exc import SQLAlchemyError
 
-from .app import db
-from .app import bcrypt
+from .main import db
+from .main import bcrypt
 
 class UserModel(db.Model):
     """
